@@ -6,6 +6,7 @@ const Users = require("./userDb");
 
 // middlewares
 const validateUser = require("../middlewares/validateUser");
+const validateUserId = require("../middlewares/validateUserId");
 
 router.post('/', validateUser, (req, res) => {
   // do your magic!
@@ -38,8 +39,9 @@ router.get('/', (req, res) => {
   })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateUserId, (req, res) => {
   // do your magic!
+  res.status(200).json(req.user);
 });
 
 router.get('/:id/posts', (req, res) => {
@@ -53,12 +55,6 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   // do your magic!
 });
-
-//custom middleware
-
-function validateUserId(req, res, next) {
-  // do your magic!
-}
 
 function validatePost(req, res, next) {
   // do your magic!
